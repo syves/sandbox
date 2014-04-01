@@ -22,9 +22,9 @@ print is_ordered("maybe")
 def ordered_vowels_words(string):
     words = string.lower().split()
     return " ".join([w for w in words if is_ordered(w)])
+    #filter?
    
 print ordered_vowels_words("Shoes in the boxes")
 
-#can i use a list comp?
-#can i use any built ins? find one!
-#can i use a diff data structure set vs list, or string into list?
+print "maybe she".split()
+print list("maybe")

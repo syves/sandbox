@@ -24,8 +24,9 @@ times_3 = functools.partial(product, 3)
 times_2 = functools.partial(product, 2)
 
         
-print map(times_2, lst)
+print "map", map(times_2, lst)
 
-print [nums * 2 for nums in lst]
 
-#:)
+print "list comp", [nums * 2 for nums in lst]
+
+
