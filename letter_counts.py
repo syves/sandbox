@@ -6,21 +6,23 @@ from collections import Counter
 #
 
 def letter_counts(text):
-    d = {}
-    
     #for char in text, add char is new key, 
     #incremet value for occurance
-    for char in alphabet
-    
-    for char in text:
-        print char
-        d[char] = 1
-        #if counts.get(char) >= 1:
-           # d[char] + 1
-        
-            #counts.get
-    #get(char = 0?)
-    return d
-
+    return Counter(text)
 
 print letter_counts("cata")
+
+#or return a {}
+
+def letter_counts(text):
+    #for char in text, add char is new key, 
+    #incremet value for occurance
+    d = {}
+    for char in text:
+        d[char] = d.get(char, 0) + 1
+        
+    return d
+
+print letter_counts("cata")
+
+
