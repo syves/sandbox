@@ -11,32 +11,48 @@
 # coordinate of the intersection by taking the minimum of the top most
 # y coordinate of each rectangle. 319
 
-#rect = ([x1,y1], [x2, y2])
+#rect = ([x1,y1], [x2, y2]) = [left, bottom], [right , top]
 
-##why arent there 4 coordinates?
-#get 2 more coordinates :bottom_right and top_left
-rect1 = [ 
-    rect1_bottom_left = [x1, y1],#min x
-    rect1_bottom_right = [x2-x1, x2], #max x
-    rect1_top_right = [x2, y2], #max y
-    rect1_top_left = [y1-y2] #min y 
-]
-
-rect2 = [ 
-    rect2_bottom_left = [x1, y1],#min x
-    rect2_bottom_right = [x2-x1, x2], #max x
-    rect2_top_right = [x2, y2], #max y
-    rect2_top_left = [y1-y2] #min y 
-]
-
-def rec_intersection(rect1, rect2):
-    #uh oh this is hard coding for once case
-    #left_most_x_inter = rect1_bottom_right - rect2_bottom_left 
-    #top_most_y_inter = rect1_top_right - rect2_top_left
+class Rectangle(object):
+    left = 0
+    right = 0
+    top = 0
+    bottom = 0
     
-    #are rec intersecting?
-    rec1_bottom_right < rec2_bottom_left or 
-    return rect_int
+    def __init__(self, left, right, top, bottom):
+        if left > right:
+            raise ValueError('right must be greater than left')
+        if bottom > top:
+            raise ValueError('top must be greater than bottom')
+        self.left = left
+        self.right = right
+        self.top = top
+        self.bottom = bottom
+        
+    def __str__(self):
+        return '<Rectangle left={} right={} top={} bottom={}>'.format(
+                self.left, self.right, self.top, self.bottom)
+        
+def coords_to_rect(bottom_left, top_right):
+    left, bottom = bottom_left
+    right, top = top_right
+    return Rectangle(left, right, top, bottom)
+    
+def rect_to_coords(rect):
+    return ([rect.left, rect.bottom], [rect.right, rect.top])
+  
+    
+def rec_intersection(rect1, rect2):
+    left = max([rect1.left, rect2.left])
+    right = min([rect1.right, rect2.right])
+    top = min([rect1.top, rect2.top])
+    bottom = max([rect1.bottom, rect2.bottom])
+    try:
+        intersection = Rectangle(left, right, top, bottom)
+    except ValueError as e:
+        return None
+    return rect_to_coords(intersection)
 
-print rec_intersection(([0, 0], [2, 1]), ([1, 0], [3, 1]))
+print rec_intersection(coords_to_rect([0, 0], [2, 1]),
+                       coords_to_rect([1, 0], [3, 1]))
 
